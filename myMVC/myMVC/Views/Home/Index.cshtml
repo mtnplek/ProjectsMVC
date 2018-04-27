@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Welcome to my website</h2>
+
+<p>On this website you can find out more about me and take a look at some of my recent projects.</p>
+
+<p>Are u feeling sick. Check your temperature here: </p>
+<input type="button" value="Check Temperature" onclick="location.href='@Url.Action("FeverCheck", "Home")'" />

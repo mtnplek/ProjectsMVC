@@ -1,0 +1,28 @@
+﻿@model myMVC.Models.Fever
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "FeverCheck";
+}
+
+
+<br />
+<form method="post">
+
+    <input type="number" name="fever" value="@Model.Temp" />
+    <input type="submit" value="Enter" />
+
+</form>
+
+@if (!Model.msg.IsEmpty())
+{
+    <h3>@Model.msg</h3>
+}
+
+
+
+
+
+
+

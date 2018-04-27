@@ -1,0 +1,52 @@
+﻿@model myMVC.Models.Guess
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "GuessGame";
+}
+<br />
+<form method="post">
+    <input type="number" name="Gueess" required value="" placeholder="Number" />
+    <h3>Guess a number between 1 & 100</h3>
+    <input type="submit" value="Guess" />
+</form>
+
+@if (!Model.msg.IsEmpty())
+    {
+        <h3>@Model.msg</h3>
+    }
+
+@if (Session["guessSess"] != null)
+{
+    <h4>Guesses</h4>
+    <table>
+        @foreach (var item in (List<int>)Session["guessSess"])
+        {
+            <tr>
+                <td>@item</td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Session["ranSess"] != null)
+{
+    <h4>Random Generated numbers</h4>
+    <table>
+        @foreach (var random in (List<int>)Session["ranSess"])
+        {
+            <tr>
+                <td>@random</td>
+            </tr>
+        }
+    </table>
+}
+
+
+
+
+
+
+
+

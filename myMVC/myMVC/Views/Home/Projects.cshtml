@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Projects";
+}
+<h2>My projects</h2>
+
+<br />
+
+<h3 style="text-align: center">Arena Fighter</h3>
+
+<div class="well well-sm">   
+    <h4>Main Class</h4>
+    <p>class Program<br /> {<br /> static void Main(string[] args)<br /> {<br /> Console.ForegroundColor = ConsoleColor.Magenta;<br /> string x = "- - - - - W E L C O M E T O - - - - -";<br /> Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (x.Length / 2)) + "}", x));<br /> Console.ForegroundColor = ConsoleColor.Blue;<br /> string y = "B a t t l e o f t h e N u m b n u t S";<br /> Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (y.Length / 2)) + "}", y));<br /> Console.ForegroundColor = ConsoleColor.White;</p>
+    <p>var spelare = new Karakt&auml;r();</p>
+    <p>var npc = new Karakt&auml;r();</p>
+    <p>var slaget = new Battle();</p>
+    <p>slaget.SpelareSkap(spelare);</p>
+    <p>slaget.Slagsm&aring;l(npc);<br /> <br /> Console.ReadKey();<br /> }<br /> }<br />}</p>
+</div>
+
+<div class="well well-sm">
+    <h4>Character Class</h4>
+    <p>class Karakt&auml;r<br /> {<br /> Random slump = new Random();</p>
+    <p>InfoGenerator slumpNamn = new InfoGenerator(DateTime.Now.Millisecond);</p>
+    <p>public List&lt;string&gt; enemyList = new List&lt;string&gt;();</p>
+    <p>public string Namn { get; set; }</p>
+    <p>public int H&auml;lsa { get; set; }</p>
+    <p>public int Skada { get; set; }</p>
+    <p>public int Styrka { get; set; }</p>
+    <p>public Karakt&auml;r()<br /> {<br /> Namn = slumpNamn.NextFirstName(); <br /> H&auml;lsa = slump.Next(10, 15);<br /> Skada = slump.Next(3, 9);<br /> Styrka = slump.Next(1, 5); <br /> }<br /> public Karakt&auml;r(string spelareNamn) : this()<br /> {<br /> this.Namn = spelareNamn;<br /> } <br /> }</p>
+</div>
+
+<div class="well well-sm">
+    <h4>Rounds Class</h4>
+    <p>class Rundor<br /> {<br /> Random slump = new Random();</p>
+    <p>public Karakt&auml;r Spelare = new Karakt&auml;r();</p>
+    <p>public Karakt&auml;r Npc = new Karakt&auml;r();</p>
+    <p>public int T&auml;rning1 { get; set; }</p>
+    <p>public int T&auml;rning2 { get; set; }<br /> <br /> public void Runda(Karakt&auml;r spelare, Karakt&auml;r npc)<br /> {<br /> Spelare = spelare;<br /> Npc = npc;</p>
+    <p>while (spelare.H&auml;lsa &gt; 0 &amp;&amp; npc.H&auml;lsa &gt; 0)<br /> {<br /> Console.WriteLine("\nPress any key to start the round!\n");<br /> Console.ReadKey(true);<br /> T&auml;rning1 = slump.Next(1, 7) + spelare.Styrka;<br /> T&auml;rning2 = slump.Next(1, 7) + npc.Styrka;</p>
+    <p>Console.WriteLine($"{spelare.Namn} rolled {T&auml;rning1}.");<br /> Console.WriteLine($"{npc.Namn} rolled {T&auml;rning2}.");<br /> <br /> if (T&auml;rning2 &lt; T&auml;rning1)<br /> {<br /> Console.ForegroundColor = ConsoleColor.Green;<br /> Console.WriteLine($"\n{Spelare.Namn} rolled highest.");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> SpelareSkada(spelare.Skada, npc.H&auml;lsa); <br /> }<br /> if (T&auml;rning1 &lt; T&auml;rning2)<br /> {<br /> Console.ForegroundColor = ConsoleColor.Red;<br /> Console.WriteLine($"\n{Npc.Namn} rolled highest.");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> NpcSkada(npc.Skada, spelare.H&auml;lsa); <br /> } <br /> else if (T&auml;rning1 == T&auml;rning2)<br /> {<br /> Console.ForegroundColor = ConsoleColor.Yellow;<br /> Console.WriteLine($"{spelare.Namn} and {npc.Namn} rolled the same.");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> }<br /> } <br /> }<br /> public void SpelareSkada(int skada, int h&auml;lsa)<br /> { <br /> Npc.H&auml;lsa = Npc.H&auml;lsa - Spelare.Skada;<br /> Console.ForegroundColor = ConsoleColor.Green;<br /> Console.WriteLine($"{Spelare.Namn} did {Spelare.Skada} damage to {Npc.Namn}. {Npc.Namn} have {Npc.H&auml;lsa} health left.");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> }<br /> public void NpcSkada(int skada, int h&auml;lsa)<br /> { <br /> Spelare.H&auml;lsa = Spelare.H&auml;lsa - Npc.Skada;<br /> Console.ForegroundColor = ConsoleColor.Red;<br /> Console.WriteLine($"{Npc.Namn} did {Npc.Skada} damage to {Spelare.Namn}. {Spelare.Namn} have {Spelare.H&auml;lsa} health left.");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> }<br /> }</p>
+</div>
+
+<div class="well well-sm">
+    <h4>Battle Class</h4>
+    <p>class Battle<br /> {<br /> Karakt&auml;r spelare = new Karakt&auml;r();</p>
+    <p>Karakt&auml;r npc = new Karakt&auml;r();</p>
+    <p>Karakt&auml;r nameList = new Karakt&auml;r();</p>
+    <p>Rundor rundor = new Rundor();</p>
+    <p>public void SpelareSkap(Karakt&auml;r spelare)<br /> {<br /> this.spelare = spelare;<br /> Console.WriteLine("Enter the name of your warrior");<br /> spelare.Namn = Console.ReadLine();<br /> }</p>
+    <p>public void Slagsm&aring;l(Karakt&auml;r npc)<br /> {<br /> Console.Clear();<br /> this.npc = npc;<br /> Console.ForegroundColor = ConsoleColor.Green;<br /> Console.WriteLine($"\nWarrior: {spelare.Namn} | Health {spelare.H&auml;lsa} | Damage {spelare.Skada} | Strength {spelare.Styrka}");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> Console.ForegroundColor = ConsoleColor.Red;<br /> Console.WriteLine($"\nEnemy: {npc.Namn} | Health {npc.H&auml;lsa} | Damage {npc.Skada} | Strength {npc.Styrka}");<br /> Console.ForegroundColor = ConsoleColor.White;<br /> rundor.Runda(spelare, npc);</p>
+    <p>if (npc.H&auml;lsa &lt;= 0)<br /> { <br /> nameList.enemyList.Add($"{spelare.Namn} fought {npc.Namn} and won!\n");<br /> <br /> Console.WriteLine("\nPress 1 to find a new opponent and continue to fight.\nPress 2 to retire your warrior.");</p>
+    <p>bool start = true;</p>
+    <p>while (start)<br /> {<br /> int userInput = Getinput();</p>
+    <p>switch (userInput)<br /> {<br /> case '1':<br /> Karakt&auml;r Npc = new Karakt&auml;r();<br /> Slagsm&aring;l(Npc);<br /> break;<br /> case '2':<br /> Console.Clear();<br /> Console.WriteLine("You chose to retire from fighting and take your knowledge elsewhere!\n");<br /> foreach (var namn in nameList.enemyList)<br /> { <br /> Console.WriteLine(namn);<br /> }<br /> Console.ReadKey();<br /> Environment.Exit(0);<br /> break;<br /> default:<br /> Console.WriteLine("\nWhat do you mean? Press 1 to Continue or 2 to Retire");<br /> break;<br /> }<br /> }<br /> }</p>
+    <p>else if (spelare.H&auml;lsa &lt;= 0)<br /> { <br /> nameList.enemyList.Add($"{spelare.Namn} fought {npc.Namn} and lost.\n"); <br /> <br /> Console.ReadKey();<br /> Console.Clear();<br /> foreach (var namn in nameList.enemyList)<br /> { <br /> Console.WriteLine(namn);<br /> }<br /> Console.ReadKey();<br /> Environment.Exit(0);<br /> }<br /> }<br /> <br /> static char Getinput()<br /> {<br /> ConsoleKeyInfo userinput = Console.ReadKey(true);<br /> return userinput.KeyChar;<br /> }<br /> }</p>
+</div>
