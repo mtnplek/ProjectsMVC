@@ -32,14 +32,14 @@ namespace myMVC.Models
                 guess.msg = $"Congratulations number {guess.Guessed} was the correct answer!";
                 guess.NewRandom();
             }
-            else if (guess.Guessed < guess.ranNumb)
+            else if (!guess.randomList.Contains(guess.Guessed))
             {
-                guess.msg = $"Your guess is to low, guess again!";
+                guess.msg = $"You guess was wrong. Try Again!";
             }
-            else if (guess.Guessed > guess.ranNumb)
-            {
-                guess.msg = "Your guess is to high, guess again!";
-            }
+            //else if (guess.Guessed > guess.ranNumb)
+            //{
+            //    guess.msg = "Your guess is to high, guess again!";
+            //}
 
         }
 
